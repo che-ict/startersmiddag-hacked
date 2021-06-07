@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Booting...</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Game page for 'Startersmiddag 2021' of HBO-ICT @ CHE" />
+    <style>
+        body {
+            background-color: black;
+            font-family: monospace;
+            color: white;
+        }
+
+        .blink {
+            animation: blink-animation .5s infinite alternate;
+        }
+        @keyframes blink-animation {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .ok {
+            color: green;
+        }
+        .missing {
+            color: yellow;
+        }
+        .checking {
+            display: inline-block;
+            animation: rotate 500ms linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(359deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <p>booting...</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Checking boot record</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Checking RAM</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Reading file table</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] BIOS Check</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Disk #1 check</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Disk #2 check</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Disk #3 check</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Phelange check</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Lemmings check</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Checking Frodo Baggings</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Ring of Power</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Checking Strider</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Calculating florbles</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] Floppy disk check</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] CD ROM check</p>
+    <p>[ <span class="ok done">OK</span><span class="checking">-</span> ] DVD check</p>
+    <p>[ <span class="missing done">MISSING</span><span class="checking">-</span> ] BLUERAY check</p>
+
+    <br>
+    <br>
+
+    <p>Welcome, <span class="var-name"></span></p>
+    <br>
+    <br>
+    <br>
+    
+    <p>Enter password: <span class="blink">_</span></p>
+
+    <script>
+        let params = new URLSearchParams(location.search);
+
+        let name = params.get('name');
+        setVar('var-name', name);
+
+        function setVar(className, value) {
+            for(let el of document.getElementsByClassName(className)) {
+                el.innerText = value;
+            }
+        }
+        
+        let t = 0;
+        for(let el of document.getElementsByTagName('p')) {
+            let done = el.getElementsByClassName('done')[0];
+            let checking = el.getElementsByClassName('checking')[0];
+            el.style.opacity = 0;
+            
+            if(done) {
+                done.style.display = "none";
+            }
+            setTimeout(() => el.style.opacity = 1, t)
+            t += Math.ceil(Math.random() * 1000);
+            if(done) {
+                setTimeout(() => {
+                    checking.style.display = "none"; 
+                    done.style.display = "";
+                }, t)
+                t += Math.ceil(100);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

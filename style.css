@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'Bungee';
+    src: url('BungeeHairline-Regular.ttf');
+}
+@font-face {
+    font-family: 'Leafraker';
+    src: url('Leafraker-WBYG.ttf');
+}
+@font-face {
+    font-family: 'Barrio';
+    src: url('Barrio-Regular.ttf');
+}
+@font-face {
+    font-family: 'Syne';
+    src: url('SyneMono-Regular.ttf');
+}
+@font-face {
+    font-family: 'KingthingsExtortion';
+    src: url('KingthingsExtortion-YMAa.ttf');
+}
+.bg1 {
+    background-image: url(bg1.jpg);
+}
+.bg2 {
+    background-image: url(bg2.jpg);
+}
+.bg3 {
+    background-image: url(bg3.jpg);
+}
+.bg4 {
+    background-image: url(bg4.jpg);
+}
+.bg5 {
+    background-image: url(bg5.jpg);
+}
+.bg6 {
+    background-image: url(bg6.jpg);
+}
+main {
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1em;
+    width: 500px;
+    top: 200px;
+    position: relative;
+    box-shadow: 4px 4px 16px 0px #575757;
+    font-family: Syne;
+}
+.kidnapped {
+    font-family: KingthingsExtortion;
+}
+.code-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+input {
+    width: 5em;
+    font-size: 22px;
+    font-family: Barrio;
+    text-align: center;
+    padding: 1em 0em;
+    border: none;
+    border: dashed 3px #484848;
+    border-radius: 8px;
+}
+
+input::placeholder {
+    color: #b92222;
+    opacity: .6;
+}
+
+.disabled {
+    opacity: 0;
+}
+
+.solved {
+    border: solid green;
+    background-color: #d3ffd3;
+}

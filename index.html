@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Laptop</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Game page for 'Startersmiddag 2021' of HBO-ICT @ CHE" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <main>
+        <span style="position: absolute; right: 1em; opacity: .3;">
+            <img src="anonymous.png" height="64px">
+        </span>
+        
+        <h1 class="kidnapped" style="display: inline-block; width: 100%; text-align: center;">Welkom, <span class="var-laptop-name"></span></h1>
+
+        <p>Je laptop is gehacked, <span class="var-laptop-name"></span>! Dat wordt dokken 🤣 Maak € 5000,- over naar ons, en je krijgt de codes om je laptop weer te unlocken 💲💲💲</p>
+
+        <span class="code-container">
+            <input id="code1" name="code1" placeholder="Code #1" class="disabled" disabled="disabled">
+            <input id="code2" name="code2" placeholder="Code #2" class="disabled" disabled="disabled">
+            <input id="code3" name="code3" placeholder="Code #3" class="disabled" disabled="disabled">
+        </span>
+    </main>
+
+    
+    <script>
+        let params = new URLSearchParams(location.search);
+        let name = params.get('name');
+        let seq = params.get('seq') || "123"; // welke codes in welke volgorde opgelost moeten worden
+
+        // update name references
+        document.title = `Laptop ${name}`;
+        setVar('var-laptop-name', name);
+
+        // set random background
+        document.body.classList.add(`bg${Math.ceil(Math.random() * 6)}`); 
+
+        // calculate result for 1st puzzle:
+        let result1 = 5;
+        if(/e/.test(name)) {
+            result1 *= 2;
+        }
+        else if(/o/.test(name)) {
+            result1 *= 3;
+        }
+
+        result1 *= name.length;
+
+        if(result1 > 50) {
+            result1 -= 3;
+        }
+
+        // handle input logic
+        let inputs = [];
+        for(let ix of seq) {
+            let el = document.getElementById('code'+ix);
+            el.onkeyup = checkInputs;
+            let solution;
+            switch(+ix) {
+                case 1: solution = `${result1}`; break;
+                case 2: solution = "32281342"; break;
+                case 3: solution = "32154"; break;
+                default: alert("Incorrect sequence!");
+            }
+
+            inputs.push({ ix: +ix, el, solution });
+        }
+
+        checkInputs();
+
+        function checkInputs() {
+            var allSolved = true;
+            
+            let i = 0;
+            let prev = null;
+            for(let input of inputs) {
+                let solved = input.el.value == input.solution;
+
+                if (allSolved) {
+                    input.el.disabled = false;
+                    input.el.readOnly = false;
+                    input.el.classList.remove('disabled');
+                    input.el.focus();
+                }
+                if(solved) {
+                    input.el.classList.add('solved');
+                    input.el.disabled = true;
+                    input.el.readOnly = true;
+                    input.el.blur();
+                }
+                
+                
+                allSolved = allSolved && solved;
+
+                i++;
+            }
+
+            if(allSolved) {
+                location.replace("solved.html?name=" + name);
+            }
+        }
+
+        function setVar(className, value) {
+            for(let el of document.getElementsByClassName(className)) {
+                el.innerText = name;
+            }
+        }
+    </script>
+</body>
+
+</html>

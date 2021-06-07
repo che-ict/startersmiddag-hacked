@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Laptop</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Game page for 'Startersmiddag 2021' of HBO-ICT @ CHE" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <main>
+        <span style="position: absolute; right: 1em; opacity: .3;">
+            <img src="anonymous.png" height="64px">
+        </span>
+        
+        <h1 class="kidnapped" style="display: inline-block; width: 100%; text-align: center;">Laptop is unlocked</span></h1>
+
+        <p>Bedankt voor het geld 😂 en beter op je spullen letten nu, want anders doen we het gewoon nog een keer! Als de laptop gerestart is, kun je weer overal bij.</p>
+
+        <span>Over <span class="var-seconden"></span> seconden wordt de laptop gerestart</span>
+        
+    </main>
+
+    
+    <script>
+        let params = new URLSearchParams(location.search);
+
+        let name = params.get('name');
+
+        document.title = `Laptop ${name}`;
+        setVar('var-laptop-name', name);
+
+        document.body.classList.add(`bg${Math.ceil(Math.random() * 6)}`); 
+
+        var seconden = 10; // lang genoeg om de studenten te laten aangeven dat het ze gelukt is.
+        setVar('var-seconden', seconden);
+        setInterval(() => {
+            if(seconden <= 0) {
+                location.replace("restart.html?name=" + name);
+            }
+            else {
+                seconden--;
+                setVar('var-seconden', seconden);
+            }
+        }, 1000);
+
+        function setVar(className, value) {
+            for(let el of document.getElementsByClassName(className)) {
+                el.innerText = value;
+            }
+        }
+    </script>
+</body>
+
+</html>
