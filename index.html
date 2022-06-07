@@ -23,6 +23,8 @@
             <input id="code1" name="code1" placeholder="Code #1" class="disabled" disabled="disabled">
             <input id="code2" name="code2" placeholder="Code #2" class="disabled" disabled="disabled">
             <input id="code3" name="code3" placeholder="Code #3" class="disabled" disabled="disabled">
+            <input id="code4" name="code4" placeholder="Code #4" class="disabled" disabled="disabled">
+            <input id="code5" name="code5" placeholder="Code #5" class="disabled" disabled="disabled">
         </span>
     </main>
 
@@ -30,7 +32,7 @@
     <script>
         let params = new URLSearchParams(location.search);
         let name = params.get('name');
-        let seq = params.get('seq') || "123"; // welke codes in welke volgorde opgelost moeten worden
+        let seq = params.get('seq') || "12345"; // welke codes in welke volgorde opgelost moeten worden
 
         // update name references
         document.title = `Laptop ${name}`;
@@ -64,6 +66,8 @@
                 case 1: solution = `${result1}`; break;
                 case 2: solution = "32281342"; break;
                 case 3: solution = "32154"; break;
+                case 4: solution = "Linus Torvalds"; break;
+                case 5: solution = "Julius Caesar"; break;
                 default: alert("Incorrect sequence!");
             }
 
@@ -78,7 +82,7 @@
             let i = 0;
             let prev = null;
             for(let input of inputs) {
-                let solved = input.el.value == input.solution;
+                let solved = (input.el.value || "").toLowerCase() == input.solution.toLowerCase();
 
                 if (allSolved) {
                     input.el.disabled = false;
